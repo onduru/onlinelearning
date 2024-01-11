@@ -11,16 +11,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -48,6 +50,7 @@ import com.example.onlinelearningapp.ui.theme.Purple40
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
+    val checkedState = remember { mutableStateOf(true) }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -61,7 +64,7 @@ fun LoginScreen(navController: NavHostController) {
             text = "Learning App",
             style = TextStyle(
                 color = Purple40,
-                fontSize =30.sp,
+                fontSize =40.sp,
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.W800,
             )
@@ -75,7 +78,7 @@ fun LoginScreen(navController: NavHostController) {
 
             style = TextStyle(
                 color = Purple40,
-                fontSize =20.sp,
+                fontSize =25.sp,
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.W800,
                 textAlign = TextAlign.Center
@@ -85,16 +88,20 @@ fun LoginScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(30.dp))
 
         Row (
-
+            modifier = Modifier
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically
+
         ){
 
             Button(onClick = { /*TODO*/
                 navController.navigate("") },
+                shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Blue,
                 contentColor = Color.White),
-            modifier = Modifier.width(width = 100.dp),
+            modifier = Modifier.width(width = 150.dp)
+                .height(height = 50.dp)
 
 
             ) {
@@ -106,11 +113,13 @@ fun LoginScreen(navController: NavHostController) {
 
             Button(onClick = { /*TODO*/
                 navController.navigate("") },
+                shape = RoundedCornerShape(10.dp),
 
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Red,
                     contentColor = Color.White),
-                modifier = Modifier.width(width = 100.dp),
+                modifier = Modifier.width(width = 150.dp)
+                    .height(height = 50.dp)
 
                 ) {
                 Text(text = "Google")
@@ -119,9 +128,13 @@ fun LoginScreen(navController: NavHostController) {
 
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
-        Column {
+        Column(
+            modifier = Modifier
+                .padding(10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             var text by remember { mutableStateOf(TextFieldValue("")) }
 
 
@@ -129,15 +142,46 @@ fun LoginScreen(navController: NavHostController) {
 
             EmailTextField()
             PasswordTextField()
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Checkbox(
+                    checked = checkedState.value,
+                    modifier = Modifier.padding(0.dp),
+                    onCheckedChange = { checkedState.value = it },
+                )
+                Text(text = "Remember me ?", modifier = Modifier.padding(0.dp))
+                Spacer(modifier = Modifier.width(30.dp))
+                Text(text = "Forget Password?")
+            }
 
 
+            Spacer(modifier = Modifier.height(30.dp))
 
             Button(onClick = { /*TODO*/
-                navController.navigate("")
+                navController.navigate("StartScreen") },
+                shape = RoundedCornerShape(10.dp),
 
-            }) {
-                Text(text = "Start ")
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Purple40,
+                    contentColor = Color.White),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(height = 50.dp)
 
+            ) {
+                Text(text = "Login With Your Account")
+            }
+
+            Spacer(modifier = Modifier.height(30.dp))
+
+            Row(
+                modifier = Modifier.padding(20.dp)
+            ){
+                Text(text = "Don't Have an Account?", modifier = Modifier.padding(1.dp))
+                Text(text = "Create Account")
             }
 
         }
@@ -151,7 +195,7 @@ fun LoginScreen(navController: NavHostController) {
 fun EmailTextField() {
     var email by remember { mutableStateOf("") }
 
-    TextField(
+    OutlinedTextField(
         value = email,
         onValueChange = { email = it },
         label = { Text("Email") },
@@ -174,7 +218,7 @@ fun EmailTextField() {
 fun PasswordTextField() {
     var password by remember { mutableStateOf("") }
 
-    TextField(
+    OutlinedTextField(
         value = password,
         onValueChange = { password = it },
         label = { Text("Password") },
@@ -189,7 +233,7 @@ fun PasswordTextField() {
             keyboardType = KeyboardType.Password,
             imeAction = androidx.compose.ui.text.input.ImeAction.Done
         ),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.padding(5.dp)
     )
 }
 

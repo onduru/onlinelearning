@@ -19,6 +19,10 @@ fun Nav(){
             LoginScreen(navController)
         }
 
+        composable(route ="StartScreen" ){
+            StartScreen(navController)
+        }
+
     }
 
 
