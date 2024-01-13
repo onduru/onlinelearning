@@ -11,8 +11,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,13 +30,16 @@ import com.example.onlinelearningapp.ui.theme.Purple40
 
 @Composable
 fun StartScreen(navController: NavHostController){
+    val checkedState = remember { mutableStateOf(true) }
+
     Column (
         modifier = Modifier
             .fillMaxSize()
-            .padding(40.dp),
+            .padding(top = 100.dp),
         //verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
+
         Text(
             text = "Learning App",
             style = TextStyle(
@@ -44,7 +50,7 @@ fun StartScreen(navController: NavHostController){
             )
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Image(
 
@@ -52,20 +58,23 @@ fun StartScreen(navController: NavHostController){
             contentDescription = "Landing Page Image"
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         
-        Text(text = "Select Your Coourse Level")
+        Text(text = "Select Your Course Level"
 
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
         Row (
-            modifier = Modifier
-                .padding(2.dp),
-            verticalAlignment = Alignment.CenterVertically
 
         ){
 
             Button(onClick = { /*TODO*/
                 navController.navigate("") },
-                shape = RoundedCornerShape(5.dp),
+                modifier = Modifier
+                    .height(30.dp)
+                    .width(90.dp),
+                        shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Purple40,
                     contentColor = Color.White),
@@ -78,12 +87,15 @@ fun StartScreen(navController: NavHostController){
 
             Button(onClick = { /*TODO*/
                 navController.navigate("") },
+                modifier = Modifier
+                    .height(30.dp)
+                    .width(90.dp),
                 shape = RoundedCornerShape(5.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Purple40,
                     contentColor = Color.White),
             ) {
-                Text(text = "Intermidate")
+                Text(text = "Intermediate")
 
             }
 
@@ -91,6 +103,9 @@ fun StartScreen(navController: NavHostController){
 
             Button(onClick = { /*TODO*/
                 navController.navigate("") },
+                modifier = Modifier
+                    .height(30.dp)
+                    .width(90.dp),
                 shape = RoundedCornerShape(5.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Purple40,
@@ -102,6 +117,39 @@ fun StartScreen(navController: NavHostController){
 
             Spacer(modifier = Modifier.width(2.dp))
 
+
+
+        }
+
+        Column {
+
+            Row {
+                Checkbox(
+                    checked = checkedState.value,
+                    modifier = Modifier.padding(1.dp),
+                    onCheckedChange = { checkedState.value = it },
+                )
+                Text(text = "Are You Sure..?", modifier = Modifier.padding(1.dp))
+
+            }
+            Spacer(modifier = Modifier.height(30.dp))
+
+                Button(
+                    onClick = { /*TODO*/
+                        navController.navigate("Home")
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Purple40,
+                        contentColor = Color.White
+                    ),
+                    modifier = Modifier.width(width = 250.dp)
+
+                )
+            {
+                Text(text = "Continue")
+
+
+            }
 
 
         }

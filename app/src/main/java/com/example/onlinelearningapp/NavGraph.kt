@@ -23,6 +23,14 @@ fun Nav(){
             StartScreen(navController)
         }
 
+        composable(route = "Home"){
+            Home(navController)
+        }
+
+        composable(route = "BookClass"){
+            BookClass(navController)
+        }
+
     }
 
 
