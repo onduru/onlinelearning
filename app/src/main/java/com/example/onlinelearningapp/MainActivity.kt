@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import com.example.onlinelearningapp.ui.theme.OnlineLearningAppTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
